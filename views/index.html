@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>British/American English Translator</title>
+    <meta
+      name="description"
+      content="An example for the fCC QA British/American English Translator project"
+    />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../public/style.css" type="text/css" />
+  </head>
+  <body>
+    <header>
+      <h1>
+        ISQA_5 - British/American English Translator
+      </h1>
+    </header>
+    <div id="userstories">
+      <h3>User Stories</h3>
+      <ol>
+        <li>
+          I can enter a simple sentence into the text area and select whether to translate to British or American English from the dropdown menu.
+        </li>
+        <li>
+          When the "Translate" button is pressed:
+          <ul>
+            <li>
+              Append the translated sentence to the <code>translated-sentence</code> <code>div</code>. See the JSON files in <code>/public</code> for the different spelling and terms your application should translate.
+            </li>
+            <li>
+              Wrap any translated terms or spelling with <code></code><span class="highlight">...</span></code> tags so it appears in green.
+            </li>
+            <li>
+              If the sentence in the text area has no terms or spelling that should be translated, append the message "Everything looks good to me!" to the <code>translated-sentence</code> <code>div</code>.
+            </li>
+            <li>
+              If there is no text in the text area, append the message "Error: No text to translate." to the <code>error-msg</code> <code>div</code>.
+            </li>
+          </ul>
+        </li>
+        <li>
+          I can press the "Clear Input" button to remove all text from the text area and the <code>translated-sentence</code> <code>div</code>.
+        </li>
+        <li>
+          All 12 unit tests are complete and passing. See <code>/tests/1_unit-tests.js</code> for examples of both correct and incorrect sentences you can use to write these tests.
+        </li>
+        <li>
+          All 4 functional tests are complete and passing.
+        </li>
+      </ol>
+    </div>
+    <hr style="margin: 25px" />
+    <div class="container">
+      <div class="form-container">
+          <textarea
+          rows="10"
+          cols="60"
+          id="text-input"
+        ></textarea>
+        <br />
+        <select id="locale-select">
+          <option value="american-to-british">American to British</option>
+          <option value="british-to-american">British to American</option>
+        </select>
+        <!-- <input type="button" value="Translate" id="translate" onclick="translateSentence();" /> -->
+        <input type="button" value="Translate" id="translate-btn" />
+        <!-- <input type="button" value="Clear" id="clear" onclick="clearAll();" /> -->
+        <input type="button" value="Clear" id="clear-btn" />
+      </div>
+      <div id="output-container">
+        <div id="solution-container">
+          Translated Sentence:
+          <div id="translated-sentence"></div>
+          <div id="error-msg"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="../public/translator.js" type="module"></script>
+</html>

@@ -1,0 +1,24 @@
+{
+  "name": "american-british-spelling-converter",
+  "version": "1.0.0",
+  "description": "Quality Assurance 4: American / British Spelling Converter",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "mocha --require @babel/register --recursive --exit --ui tdd tests/"
+  },
+  "dependencies": {
+    "@babel/core": "^7.7.5",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/register": "^7.7.4",
+    "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "jsdom": "^16.2.0",
+    "mocha": "^6.2.2",
+    "nodemon": "^2.0.2"
+  },
+  "license": "MIT"
+}
