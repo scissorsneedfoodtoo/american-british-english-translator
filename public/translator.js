@@ -42,10 +42,12 @@ const translateSentence = (str = textArea.value, targetLocale) => {
 
       // console.log(cleanStrArr, currWordOrTermArr, currWordOrTermArr.every(isPresent));
 
-      // Check that the whole word or term from the dictionary is
-      // in the original string array, and not a shorter
-      // version like favor --> favorite.
-      // Store changes to both newStrArr and preservedCapsArr
+      /* 
+        Check that the whole word or term from the dictionary is
+        in the original string array, and not a shorter
+        version like favor --> favorite.
+        Store changes to both newStrArr and preservedCapsArr
+      */
       if (currWordOrTermArr.every(isPresent)) {
         // single word or no spaces
         if (currWordOrTermArr.length === 1) {
@@ -144,9 +146,15 @@ clearBtn.addEventListener('click', () => {
   clearAll();
 });
 
-// Export your functions for testing
-module.exports = {
-  clearAll,
-  translateSentence,
-  displayTranslation
-}
+/* 
+  Export your functions for testing in Node.
+  Note: The `try` block is to prevent errors on
+  the client side
+*/
+try {
+  module.exports = {
+    clearAll,
+    translateSentence,
+    displayTranslation
+  }
+} catch (e) {}
