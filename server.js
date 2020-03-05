@@ -10,6 +10,7 @@ const runner            = require('./test-runner');
 const app = express();
 
 app.use('/public', express.static(process.cwd() + '/public'));
+app.use(cors({origin: '*'})); //For FCC testing purposes only
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,6 +20,9 @@ app.route('/')
   .get(function (req, res) {
     res.sendFile(process.cwd() + '/views/index.html');
   }); 
+
+//For FCC testing purposes
+fccTestingRoutes(app);
     
 // 404 Not Found Middleware
 app.use(function(req, res, next) {
