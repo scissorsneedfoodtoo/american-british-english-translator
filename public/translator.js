@@ -125,15 +125,6 @@ const displayTranslation = obj => {
   }
 }
 
-// // REMOVE FROM BOILERPLATE!
-// document.addEventListener('DOMContentLoaded', () => {
-//   // for testing
-//   document.getElementById('text-input').value = "I bought tickets from a scalper on main street. I walked counterclockwise.";
-//   // document.getElementById('text-input').value = "freeCodeCamp is my favorite.";
-//   // document.getElementById('text-input').value = "Favorite favor.";
-//   // document.getElementById('error-msg').innerHTML = "Error: No text to translate.";
-// });
-
 // Handle buttons
 const translateBtn = document.getElementById('translate-btn');
 translateBtn.addEventListener('click', () => {
