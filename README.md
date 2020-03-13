@@ -15,7 +15,7 @@
 
 ### Testing and additional notes
 
-1. To run the tests on Glitch, set NODE_ENV to `test` without quotes
-2. To run the tests from the console, run `npm run test`
-3. All logic can go into `public/translator.js`
-4. Create all of the unit/functional tests in `tests/1_unit-tests.js` and `tests/2_functional-tests.js`
+* To run the tests on Glitch, set NODE_ENV to `test` without quotes.
+* To run the tests in the console, use the command `npm run test`. To open the Glitch console, first click "Tools" in the bottom left corner and then click "Full Page Console".
+* All logic can go into `public/translator.js`.
+* Create all of the unit/functional tests in `tests/1_unit-tests.js` and `tests/2_functional-tests.js`.
