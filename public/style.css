@@ -1,6 +1,5 @@
-#user-stories {
-  margin-left: 5%; 
-  margin-top: 5%;
+code {
+  background: #d0d0d5;
 }
 
 .container {
@@ -16,10 +15,16 @@ textarea {
   width: 100%;
 }
 
-#user-stories,
+#user-stories {
+  font-size: 1.2em;
+}
+
 #output-container,
-#text-input {
-  font-size: 1.1rem;
+#solution-container,
+#text-input,
+#locale-select,
+input[type="button"] {
+  font-size: 1.1em;
 }
 
 #output-container {

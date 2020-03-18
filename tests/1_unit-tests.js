@@ -116,7 +116,7 @@ suite('Unit Tests', () => {
         done();
       });
 
-      test("I've just got bits and bobs in my bum bag. --> I had a cookie then went to the fish-and-chip shop.", done => {
+      test("I've just got bits and bobs in my bum bag. --> I've just got odds and ends in my fanny pack.", done => {
         const input = "I've just got bits and bobs in my bum bag.";
         const output = "I've just got odds and ends in my fanny pack.";
         const testStr = Translator.translateSentence(input, 'american').translatedStr;

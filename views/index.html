@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>British/American English Translator</title>
+    <title>American/British English Translator</title>
     <meta
       name="description"
-      content="An example for the fCC QA British/American English Translator project"
+      content="An example for the fCC QA American/British English Translator project"
     />
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -14,40 +14,35 @@
   <body>
     <header>
       <h1>
-        ISQA_5 - British/American English Translator
+        Quality Assurance 5: American / British English Translator
       </h1>
     </header>
-    <div id="userstories">
+    <div id="user-stories">
       <h3>User Stories</h3>
       <ol>
         <li>
           I can enter a simple sentence into the text area and select whether to translate to British or American English from the dropdown menu.
         </li>
         <li>
-          When the "Translate" button is pressed:
-          <ul>
-            <li>
-              Append the translated sentence to the <code>translated-sentence</code> <code>div</code>. See the JavaScript files in <code>/public</code> for the different spelling and terms your application should translate.
-            </li>
-            <li>
-              Wrap any translated terms or spelling with <code>&lt;span class=&quot;highlight&quot;&gt;...&lt;/span&gt;</code> tags so they appear in green.
-            </li>
-            <li>
-              If the sentence in the text area has no terms or spelling that should be translated, append the message "Everything looks good to me!" to the <code>translated-sentence</code> <code>div</code>.
-            </li>
-            <li>
-              If there is no text in the text area, append the message "Error: No text to translate." to the <code>error-msg</code> <code>div</code>.
-            </li>
-          </ul>
+          When the "Translate" button is pressed, append the translated sentence to the <code>translated-sentence</code> <code>div</code>. See the JavaScript files in <code>/public</code> for the different spelling and terms your application should translate.
+        </li>
+        <li>
+          Wrap any translated spelling or terms with <code>&lt;span class=&quot;highlight&quot;&gt;...&lt;/span&gt;</code> tags so they appear in green.
+        </li>
+        <li>
+          If the sentence in the text area has no spelling or terms that should be translated, append the message "Everything looks good to me!" to the <code>translated-sentence</code> <code>div</code>.
+        </li>
+        <li>
+          If there is no text in the text area, append the message "Error: No text to translate." to the <code>error-msg</code> <code>div</code> so the text appears in red.
         </li>
         <li>
           I can press the "Clear Input" button to remove all text from the text area and the <code>translated-sentence</code> <code>div</code>.
         </li>
         <li>
-          All 12 unit tests are complete and passing. See <code>/tests/1_unit-tests.js</code> for examples of sentences you can use to write these tests.
+          All 12 unit tests are complete and passing. See <code>/tests/1_unit-tests.js</code> for the sentences you should write tests for.
         </li>
         <li>
-          All 4 functional tests are complete and passing.
+          All 4 functional tests are complete and passing. See <code>/tests/2_functional-tests.js</code> for the functionality you should write tests for.
         </li>
       </ol>
     </div>
