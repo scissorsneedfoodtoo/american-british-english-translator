@@ -1,4 +1,3 @@
-// export const americanToBritishSpelling = {
 const americanToBritishSpelling = {
   "accessorize": "accessorise",
   "accessorized": "accessorised",
@@ -379,6 +378,7 @@ const americanToBritishSpelling = {
   "denationalized": "denationalised",
   "denationalizes": "denationalises",
   "denationalizing": "denationalising",
+  "donut": "doughnut",
   "deodorize": "deodorise",
   "deodorized": "deodorised",
   "deodorizes": "deodorises",

@@ -1,4 +1,3 @@
-// export const americanOnly = {
 const americanOnly = {
   "acclimate": "acclimatise",
   "acetaminophen": "paracetamol",

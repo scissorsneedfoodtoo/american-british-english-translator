@@ -25,9 +25,9 @@ const clearAll = () => {
 }
 
 const translateSentence = (str = textArea.value, targetLocale) => {
-  const cleanStrArr = str.toLowerCase().split(/([\s,.;])/).filter(el => el !== '');
-  let preservedCapsArr = str.split(/([\s,.;])/).filter(el => el !== '');
-  const cleanStr = str.toLowerCase().replace(/[,.;]/g, '');
+  const cleanStrArr = str.toLowerCase().split(/([\s,.;?])/).filter(el => el !== '');
+  let preservedCapsArr = str.split(/([\s,.;?])/).filter(el => el !== '');
+  const cleanStr = str.toLowerCase().replace(/[,.;?]/g, '');
   const targetDict = targetLocale === 'british' ? americanToBritishDict : britishToAmericanDict;
 
   let newStrArr = [...cleanStrArr];
@@ -40,25 +40,20 @@ const translateSentence = (str = textArea.value, targetLocale) => {
       const currWordOrTermArr = currWordOrTerm.split(/(\s)/);
       const isPresent = (str) => cleanStrArr.indexOf(str) >= 0;
 
-      // console.log(cleanStrArr, currWordOrTermArr, currWordOrTermArr.every(isPresent));
-
       /* 
         Check that the whole word or term from the dictionary is
         in the original string array, and not a shorter
         version like favor --> favorite.
-        Store changes to both newStrArr and preservedCapsArr
+        Store changes to newStrArr
       */
       if (currWordOrTermArr.every(isPresent)) {
         // single word or no spaces
         if (currWordOrTermArr.length === 1) {
-          preservedCapsArr[preservedCapsArr.indexOf(currWordOrTerm)] = newWordOrTerm;
           newStrArr[newStrArr.indexOf(currWordOrTerm)] = newWordOrTerm;
           translatedWordsOrTerms.push(newWordOrTerm);
         } else {
           const targetIndex = newStrArr.indexOf(...currWordOrTermArr);
-          preservedCapsArr.splice(preservedCapsArr.indexOf(...currWordOrTermArr), currWordOrTermArr.length - 1);
           newStrArr.splice(newStrArr.indexOf(...currWordOrTermArr), currWordOrTermArr.length - 1);
-          preservedCapsArr[targetIndex] = newWordOrTerm;
           newStrArr[targetIndex] = newWordOrTerm;
           translatedWordsOrTerms.push(newWordOrTerm);
         }

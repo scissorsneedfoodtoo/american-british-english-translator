@@ -1,4 +1,3 @@
-// export const britishOnly = {
 const britishOnly = {
   "abseil": "rappel",
   "accountancy": "accounting",
@@ -74,6 +73,7 @@ const britishOnly = {
   "courgette": "zucchini",
   "crisps": "potato chips",
   "current account": "checking account",
+  "daft": "silly",
   "dogsbody": "grunt",
   "dosh": "dough",
   "double first": "undergraduate degree",
@@ -94,6 +94,7 @@ const britishOnly = {
   "estate agent": "real estate agent",
   "estate car": "station wagon",
   "extension lead": "extension cord",
+  "fancy a": "do you want a",
   "fairy cake": "cupcake",
   "fairy lights": "Christmas lights",
   "fire brigade": "fire department",
@@ -205,6 +206,7 @@ const britishOnly = {
   "snog": "kiss",
   "spawny": "lucky",
   "spiffing": "spiffy",
+  "spot of tea": "cup of tea",
   "squaddie": "grunt",
   "squidgy": "squishy",
   "stockist": "dealer",
