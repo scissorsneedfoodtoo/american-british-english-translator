@@ -1,7 +1,7 @@
 {
-  "name": "american-british-spelling-translator",
+  "name": "american-british-english-translator",
   "version": "1.0.0",
-  "description": "Quality Assurance 4: American / British Spelling Translator",
+  "description": "Quality Assurance 5: American / British English Translator",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",

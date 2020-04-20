@@ -9,16 +9,20 @@
 const chai = require('chai');
 const assert = chai.assert;
 
-// Mock the DOM for testing
 const { JSDOM } = require('jsdom');
-const dom = new JSDOM(`<!DOCTYPE html><html><body><div class="container"><div class="form-container"><textarea rows="10" cols="60" id="text-input"></textarea><br /><select id="locale-select"><option value="american-to-british">American to British</option><option value="british-to-american">British to American</option></select><input type="button" value="Translate" id="translate-btn" /><input type="button" value="Clear" id="clear-btn" /></div><div id="output-container"><div id="solution-container">Translated Sentence:<div id="translated-sentence"></div><div id="error-msg"></div></div></div></div></body></html>`);
-
-global.window = dom.window;
-global.document = dom.window.document;
-
-const Translator = require('../public/translator.js');
+let Translator;
 
 suite('Unit Tests', () => {
+  suiteSetup(() => {
+    // Mock the DOM for testing and load Translator
+    return JSDOM.fromFile('./views/index.html')
+      .then((dom) => {
+        global.window = dom.window;
+        global.document = dom.window.document;
+
+        Translator = require('../public/translator.js');
+      });
+  });
 
   suite('Function translateSentence(input, targetLocale)', () => {
 

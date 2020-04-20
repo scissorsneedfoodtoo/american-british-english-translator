@@ -24,7 +24,7 @@ const clearAll = () => {
   return textArea.value = '', translationDiv.textContent = '', errorDiv.textContent = '';
 }
 
-const translateSentence = (str = textArea.value, targetLocale) => {
+const translateSentence = (str, targetLocale) => {
   const cleanStrArr = str.toLowerCase().split(/([\s,.;?])/).filter(el => el !== '');
   let preservedCapsArr = str.split(/([\s,.;?])/).filter(el => el !== '');
   const cleanStr = str.toLowerCase().replace(/[,.;?]/g, '');

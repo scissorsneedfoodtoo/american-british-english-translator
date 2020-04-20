@@ -9,9 +9,13 @@
 const chai = require('chai');
 const assert = chai.assert;
 
-const Translator = require('../public/translator.js');
+let Translator;
 
 suite('Functional Tests', () => {
+  suiteSetup(() => {
+    // DOM already mocked -- load translator then run tests
+    Translator = require('../public/translator.js');
+  });
 
   suite('Function displayTranslation()', () => {
     /* 
@@ -21,11 +25,11 @@ suite('Functional Tests', () => {
     */
     test("Translation appended to the `translated-sentence` `div`", done => {
       const textArea = document.getElementById('text-input');
-      textArea.value = "freeCodeCamp is my favorite.";
       const translationDiv = document.getElementById('translated-sentence');
       const output = 'freeCodeCamp is my <span class="highlight">favourite</span>.';
 
       // Simulate click
+      textArea.value = "freeCodeCamp is my favorite.";
       Translator.translateSentence(textArea.value, 'british');
 
       assert.strictEqual(translationDiv.innerHTML, output);
