@@ -1,20 +1,38 @@
 import { americanOnly } from './american-only.js';
 import { britishOnly } from './british-only.js';
 import { americanToBritishSpelling } from './american-to-british-spelling.js';
+import { americanToBritishHonorifics } from './american-to-british-honorifics.js';
 
-// Handle spelling differences
+// Handle British equivalents for spelling
 let americanToBritishDict = { ...americanToBritishSpelling };
-let britishToAmericanDict;
-britishToAmericanDict = Object.keys(americanToBritishDict).reduce((obj, curr) => {
-  obj[americanToBritishDict[curr]] = curr;
-  return obj;
-}, {});
 
-// Append American only phrases
+const reverseDictionary = obj => {
+  return Object.keys(obj).reduce((acc, curr) => {
+    acc[obj[curr]] = curr;
+    return acc;
+  }, {});
+}
+
+// Get British versions of spelling and honorifics
+let britishToAmericanDict = reverseDictionary({ ...americanToBritishDict });
+let britishToAmericanHonorifics = reverseDictionary({...americanToBritishHonorifics });
+
+// Append American only phrases and honorifics
 americanToBritishDict = { ...americanToBritishDict, ...americanOnly }
 
 // Append British only phrases
 britishToAmericanDict = { ...britishToAmericanDict, ...britishOnly }
+
+const objUpperCase = obj => {
+  return Object.keys(obj).reduce((acc, curr) => {
+    const upperKey = curr[0].toUpperCase() + curr.slice(1);
+    acc[upperKey] = upperKey.includes('.') ? upperKey.replace('.', '') : `${upperKey}.`;
+
+    return acc;
+  }, {});
+}
+const upLowAmericanToBritishHonorifics = { ...americanToBritishHonorifics, ...objUpperCase(americanToBritishHonorifics) }
+const upLowBritishToAmericanHonorifics = { ...britishToAmericanHonorifics, ...objUpperCase(britishToAmericanHonorifics) }
 
 const textArea = document.getElementById('text-input');
 const translationDiv = document.getElementById('translated-sentence');
@@ -25,13 +43,29 @@ const clearAll = () => {
 }
 
 const translateSentence = (str, targetLocale) => {
-  const cleanStrArr = str.toLowerCase().split(/([\s,.;?])/).filter(el => el !== '');
-  let preservedCapsArr = str.split(/([\s,.;?])/).filter(el => el !== '');
+  const translatedWordsOrTerms = [];
+  const targetHonorifics = targetLocale === 'british' ? upLowAmericanToBritishHonorifics : upLowBritishToAmericanHonorifics;
+  // Deal with honorifics early by replacing instances
+  // of them in the current string
+  const handleHonorifics = str => {
+    return str.split(' ').map(s => {
+      const match = targetHonorifics[s];
+      if (match) {
+        translatedWordsOrTerms.push(match);
+        return match;
+      } else {
+        return s;
+      }
+    }).join(' ');
+  }
+
+  const honorificStr = handleHonorifics(str);
+  let cleanStrArr = honorificStr.toLowerCase().split(/([\s,.;?])/).filter(el => el !== '');
+  let preservedCapsArr = honorificStr.split(/([\s,.;?])/).filter(el => el !== '');
   const cleanStr = str.toLowerCase().replace(/[,.;?]/g, '');
   const targetDict = targetLocale === 'british' ? americanToBritishDict : britishToAmericanDict;
 
   let newStrArr = [...cleanStrArr];
-  const translatedWordsOrTerms = [];
 
   Object.keys(targetDict).forEach(currWordOrTerm => {
     // Check whole string to handle longer terms

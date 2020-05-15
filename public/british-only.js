@@ -1,4 +1,6 @@
-const britishOnly = {
+// American equivalents of British words
+
+export const britishOnly = {
   "abseil": "rappel",
   "accountancy": "accounting",
   "advert": "advertisement",
@@ -241,8 +243,3 @@ const britishOnly = {
   "y-fronts": "briefs",
   "zebra crossing": "crosswalk"
 }
-
-// Export for unit tests
-export { 
-  britishOnly 
-};

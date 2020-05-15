@@ -1,4 +1,4 @@
-const americanToBritishSpelling = {
+export const americanToBritishSpelling = {
   "accessorize": "accessorise",
   "accessorized": "accessorised",
   "accessorizes": "accessorises",
@@ -1699,8 +1699,3 @@ const americanToBritishSpelling = {
   "yogurt": "yoghurt",
   "yogurts": "yoghurts"
 }
-
-// Export for unit tests
-export { 
-  americanToBritishSpelling 
-};

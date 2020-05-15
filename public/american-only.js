@@ -1,4 +1,6 @@
-const americanOnly = {
+// British equivalents of American words
+
+export const americanOnly = {
   "acclimate": "acclimatise",
   "acetaminophen": "paracetamol",
   "baby carriage": "pram",
@@ -182,8 +184,3 @@ const americanOnly = {
   "zipper": "zip",
   "zucchini": "courgette"
 }
-
-// Export for unit tests
-export { 
-  americanOnly 
-};
