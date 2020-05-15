@@ -160,6 +160,7 @@ export const americanOnly = {
   "stop light": "traffic light",
   "streetcar": "tram",
   "stroller": "pram",
+  "swap meet": "car boot sale",
   "sweatpants": "track bottoms",
   "tailpipe": "exhaust pipe",
   "takeout": "takeaway",

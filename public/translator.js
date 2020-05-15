@@ -59,61 +59,74 @@ const translateSentence = (str, targetLocale) => {
     }).join(' ');
   }
 
+  const fixTimes = arr => arr.reduce((acc, curr, i, arr) => {
+    const currNumber = parseInt(curr);
+    const timeSeparator = targetLocale === 'british' ? arr[i + 1] === ':' : arr[i + 1] === '.';
+    const followingNumber = parseInt(arr[i + 2]);
+    if (currNumber && timeSeparator && followingNumber) {
+      const time = targetLocale === 'british' ? `${currNumber}.${followingNumber}` : `${currNumber}:${followingNumber}`;
+      acc.push(time);
+      translatedWordsOrTerms.push(time);
+      // Remove the next two values
+      arr.splice(i + 1, 2);
+    } else {
+      acc.push(curr);
+    }
+
+    return acc;
+  }, []);
+
   const honorificStr = handleHonorifics(str);
-  let cleanStrArr = honorificStr.toLowerCase().split(/([\s,.;?])/).filter(el => el !== '');
-  let preservedCapsArr = honorificStr.split(/([\s,.;?])/).filter(el => el !== '');
-  const cleanStr = str.toLowerCase().replace(/[,.;?]/g, '');
+  let lowerStrArr = honorificStr.toLowerCase().split(/([\s,.;:?])/).filter(el => el !== '');
+  let preservedCapsArr = honorificStr.split(/([\s,.;:?])/).filter(el => el !== '');
   const targetDict = targetLocale === 'british' ? americanToBritishDict : britishToAmericanDict;
 
-  let newStrArr = [...cleanStrArr];
+  lowerStrArr = fixTimes(lowerStrArr);
+  preservedCapsArr = fixTimes(preservedCapsArr);
 
   Object.keys(targetDict).forEach(currWordOrTerm => {
+    // Create clean, updated string to test for words/terms
+    const testStr = lowerStrArr.join('').replace(/[,.;?]/g, '');
+
     // Check whole string to handle longer terms
-    if (cleanStr.includes(currWordOrTerm)) {
+    if (testStr.includes(currWordOrTerm)) {
       const newWordOrTerm = targetDict[currWordOrTerm];
       const currWordOrTermArr = currWordOrTerm.split(/(\s)/);
-      const isPresent = (str) => cleanStrArr.indexOf(str) >= 0;
+      const isPresent = (str) => lowerStrArr.indexOf(str) >= 0;
 
       /* 
         Check that the whole word or term from the dictionary is
         in the original string array, and not a shorter
         version like favor --> favorite.
-        Store changes to newStrArr
+        Store changes to lowerStrArr and preservedCapsArr
       */
       if (currWordOrTermArr.every(isPresent)) {
-        // single word or no spaces
+        // Single word or no spaces
         if (currWordOrTermArr.length === 1) {
-          newStrArr[newStrArr.indexOf(currWordOrTerm)] = newWordOrTerm;
+          preservedCapsArr[lowerStrArr.indexOf(currWordOrTerm)] = newWordOrTerm;
+          lowerStrArr[lowerStrArr.indexOf(currWordOrTerm)] = newWordOrTerm;
+
           translatedWordsOrTerms.push(newWordOrTerm);
         } else {
-          const targetIndex = newStrArr.indexOf(...currWordOrTermArr);
-          newStrArr.splice(newStrArr.indexOf(...currWordOrTermArr), currWordOrTermArr.length - 1);
-          newStrArr[targetIndex] = newWordOrTerm;
+          const targetIndex = lowerStrArr.indexOf(...currWordOrTermArr);
+          lowerStrArr.splice(targetIndex, currWordOrTermArr.length, newWordOrTerm);
+          // Handle cases where the original term was capitalized
+          const firstWordOfTerm = preservedCapsArr.slice(targetIndex, targetIndex + currWordOrTermArr.length)
+          const capitalTerm = firstWordOfTerm[0].toUpperCase() === firstWordOfTerm[0];
+          preservedCapsArr.splice(targetIndex, currWordOrTermArr.length, capitalTerm ? newWordOrTerm[0].toUpperCase() + newWordOrTerm.slice(1) : newWordOrTerm);
+          
           translatedWordsOrTerms.push(newWordOrTerm);
         }
       }
     }
   });
 
-  // Compare translated newStrArr to preservedCapsArr
-  // and replace any exact matches
-  newStrArr.forEach((str, i, arr) => {
-    // console.log(str, preservedCapsArr[i]);
-    if (str === preservedCapsArr[i].toLowerCase()) {
-      newStrArr[i] = preservedCapsArr[i];
-    } else {
-      // Capitalize translated words / terms if the original
-      // was capitalized
-      if (preservedCapsArr[i][0].toUpperCase() === preservedCapsArr[i][0]) {
-        newStrArr[i] = arr[i][0].toUpperCase() + arr[i].slice(1);
-      }
-    }
-  });
+  // console.log(lowerStrArr, preservedCapsArr);
 
-  const translatedStr = collapseSentenceArr(newStrArr);
+  const translatedStr = collapseSentenceArr(preservedCapsArr);
   const translationObj = {
     translatedStr: translatedStr,
-    translatedStrArr: newStrArr,
+    translatedStrArr: preservedCapsArr,
     translatedWordsOrTerms: translatedWordsOrTerms
   }
 

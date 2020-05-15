@@ -76,6 +76,38 @@ suite('Unit Tests', () => {
         done();
       });
 
+      test('To play hooky means to skip class or work. --> To bunk off means to skip class or work.', done => {
+        const input = 'To play hooky means to skip class or work.';
+        const output = 'To bunk off means to skip class or work.';
+        const testStr = Translator.translateSentence(input, 'british').translatedStr;
+        assert.strictEqual(testStr, output);
+        done();
+      });
+
+      test('No Mr. Bond, I expect you to die. --> No Mr Bond, I expect you to die. ', done => {
+        const input = 'No Mr. Bond, I expect you to die.';
+        const output = 'No Mr Bond, I expect you to die.';
+        const testStr = Translator.translateSentence(input, 'british').translatedStr;
+        assert.strictEqual(testStr, output);
+        done();
+      });
+
+      test('Dr. Grosh will see you now. --> Dr Grosh will see you now. ', done => {
+        const input = 'Dr. Grosh will see you now.';
+        const output = 'Dr Grosh will see you now.';
+        const testStr = Translator.translateSentence(input, 'british').translatedStr;
+        assert.strictEqual(testStr, output);
+        done();
+      });
+
+      test('Lunch is at 12:15 today. --> Lunch is at 12.15 today.', done => {
+        const input = 'Lunch is at 12:15 today.';
+        const output = 'Lunch is at 12.15 today.';
+        const testStr = Translator.translateSentence(input, 'british').translatedStr;
+        assert.strictEqual(testStr, output);
+        done();
+      });
+
     });
 
     suite('British to American English', () => {
@@ -124,6 +156,38 @@ suite('Unit Tests', () => {
         const input = "I've just got bits and bobs in my bum bag.";
         const output = "I've just got odds and ends in my fanny pack.";
         const testStr = Translator.translateSentence(input, 'american').translatedStr;
+        assert.strictEqual(testStr, output);
+        done();
+      });
+
+      test("The car boot sale at Boxted Airfield was called off. --> The swap meet at Boxted Airfield was called off.", done => {
+        const input = "The car boot sale at Boxted Airfield was called off.";
+        const output = "The swap meet at Boxted Airfield was called off.";
+        const testStr = Translator.translateSentence(input, 'american').translatedStr;
+        assert.strictEqual(testStr, output);
+        done();
+      });
+
+      test("Have you met Mrs Kalyani? --> Have you met Mrs. Kalyani?", done => {
+        const input = "Have you met Mrs Kalyani?";
+        const output = "Have you met Mrs. Kalyani?";
+        const testStr = Translator.translateSentence(input, 'american').translatedStr;
+        assert.strictEqual(testStr, output);
+        done();
+      });
+
+      test("Prof Joyner of King's College, London. --> Prof. Joyner of King's College, London.", done => {
+        const input = "Prof Joyner of King's College, London.";
+        const output = "Prof. Joyner of King's College, London.";
+        const testStr = Translator.translateSentence(input, 'american').translatedStr;
+        assert.strictEqual(testStr, output);
+        done();
+      });
+
+      test('Tea time is usually around 4 or 4.30. --> Tea time is usually around 4 or 4:30.', done => {
+        const input = 'Lunch is at 12:15 today.';
+        const output = 'Lunch is at 12.15 today.';
+        const testStr = Translator.translateSentence(input, 'british').translatedStr;
         assert.strictEqual(testStr, output);
         done();
       });
