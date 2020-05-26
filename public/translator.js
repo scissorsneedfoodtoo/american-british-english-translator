@@ -1,7 +1,7 @@
 import { americanOnly } from './american-only.js';
 import { britishOnly } from './british-only.js';
 import { americanToBritishSpelling } from './american-to-british-spelling.js';
-import { americanToBritishHonorifics } from './american-to-british-honorifics.js';
+import { americanToBritishTitles } from './american-to-british-titles.js';
 
 // Handle British equivalents for spelling
 let americanToBritishDict = { ...americanToBritishSpelling };
@@ -13,11 +13,11 @@ const reverseDictionary = obj => {
   }, {});
 }
 
-// Get British versions of spelling and honorifics
+// Get British versions of spelling and titles
 let britishToAmericanDict = reverseDictionary({ ...americanToBritishDict });
-let britishToAmericanHonorifics = reverseDictionary({...americanToBritishHonorifics });
+let britishToAmericanTitles = reverseDictionary({...americanToBritishTitles });
 
-// Append American only phrases and honorifics
+// Append American only phrases and titles
 americanToBritishDict = { ...americanToBritishDict, ...americanOnly }
 
 // Append British only phrases
@@ -31,8 +31,8 @@ const objUpperCase = obj => {
     return acc;
   }, {});
 }
-const upLowAmericanToBritishHonorifics = { ...americanToBritishHonorifics, ...objUpperCase(americanToBritishHonorifics) }
-const upLowBritishToAmericanHonorifics = { ...britishToAmericanHonorifics, ...objUpperCase(britishToAmericanHonorifics) }
+const upLowAmericanToBritishTitles = { ...americanToBritishTitles, ...objUpperCase(americanToBritishTitles) }
+const upLowBritishToAmericanTitles = { ...britishToAmericanTitles, ...objUpperCase(britishToAmericanTitles) }
 
 const textArea = document.getElementById('text-input');
 const translationDiv = document.getElementById('translated-sentence');
@@ -44,12 +44,12 @@ const clearAll = () => {
 
 const translateSentence = (str, targetLocale) => {
   const translatedWordsOrTerms = [];
-  const targetHonorifics = targetLocale === 'british' ? upLowAmericanToBritishHonorifics : upLowBritishToAmericanHonorifics;
-  // Deal with honorifics early by replacing instances
+  const targetTitles = targetLocale === 'british' ? upLowAmericanToBritishTitles : upLowBritishToAmericanTitles;
+  // Deal with titles early by replacing instances
   // of them in the current string
-  const handleHonorifics = str => {
+  const handleTitles = str => {
     return str.split(' ').map(s => {
-      const match = targetHonorifics[s];
+      const match = targetTitles[s];
       if (match) {
         translatedWordsOrTerms.push(match);
         return match;
@@ -76,9 +76,9 @@ const translateSentence = (str, targetLocale) => {
     return acc;
   }, []);
 
-  const honorificStr = handleHonorifics(str);
-  let lowerStrArr = honorificStr.toLowerCase().split(/([\s,.;:?])/).filter(el => el !== '');
-  let preservedCapsArr = honorificStr.split(/([\s,.;:?])/).filter(el => el !== '');
+  const titleStr = handleTitles(str);
+  let lowerStrArr = titleStr.toLowerCase().split(/([\s,.;:?])/).filter(el => el !== '');
+  let preservedCapsArr = titleStr.split(/([\s,.;:?])/).filter(el => el !== '');
   const targetDict = targetLocale === 'british' ? americanToBritishDict : britishToAmericanDict;
 
   lowerStrArr = fixTimes(lowerStrArr);
